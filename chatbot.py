@@ -15,7 +15,7 @@ class ChatbotSchema(TypedDict):
 def chatnode(state: ChatbotSchema):
     messages = state['messages']
     response = llm.invoke(messages)
-    return {"message":[response]}
+    return {"messages":[response]}
 
 grpah = StateGraph(ChatbotSchema)
 
