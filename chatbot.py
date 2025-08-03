@@ -9,10 +9,12 @@ load_dotenv()
 llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash")
 
 class ChatbotSchema(TypedDict):
+    
     messages: Annotated[list[BaseMessage], add_messages]
 
 def chatnode(state: ChatbotSchema):
-    response = llm.invoke(state["messages"])
+    messages = state['messages']
+    response = llm.invoke(messages)
     return {"message":[response]}
 
 grpah = StateGraph(ChatbotSchema)
