@@ -2,6 +2,8 @@ import streamlit as st
 from chatbot import workflow
 from langchain_core.messages import HumanMessage
 
+st.title(" AI Chatbot Assistant ")
+
 config = {"configurable":{"thread_id":"1"}}
 
 if 'message_history' not in st.session_state:
