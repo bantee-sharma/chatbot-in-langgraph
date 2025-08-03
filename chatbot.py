@@ -7,20 +7,22 @@ from langchain_core.messages import HumanMessage, BaseMessage
 load_dotenv()
 llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash")
 
-class ChatbotSchema(TypedDict):
-    messages: Annotated[list[BaseMessage], add_messages]
+print(llm.invoke("hi"))
 
-def chatnode(state: ChatbotSchema):
-    response = llm.invoke(state["messages"])
-    return {"message":[response]}
+# class ChatbotSchema(TypedDict):
+#     messages: Annotated[list[BaseMessage], add_messages]
 
-grpah = StateGraph(ChatbotSchema)
+# def chatnode(state: ChatbotSchema):
+#     response = llm.invoke(state["messages"])
+#     return {"message":[response]}
 
-grpah.add_node("chatbot", chatnode)
+# grpah = StateGraph(ChatbotSchema)
 
-grpah.add_edge(START,"chatbot")
-grpah.add_edge("chatbot",END)
+# grpah.add_node("chatbot", chatnode)
 
-workflow = grpah.compile()
+# grpah.add_edge(START,"chatbot")
+# grpah.add_edge("chatbot",END)
 
-print(workflow.invoke({"message":"hi"}))
+# workflow = grpah.compile()
+
+# print(workflow.invoke({"message":"hi"}))
