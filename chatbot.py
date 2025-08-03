@@ -3,6 +3,7 @@ from langgraph.graph import StateGraph, END, START, add_messages
 from dotenv import load_dotenv
 from typing import TypedDict, Annotated
 from langchain_core.messages import HumanMessage, BaseMessage
+from langgraph.checkpoint.memory import InMemorySaver
 
 load_dotenv()
 llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash")
@@ -20,7 +21,6 @@ grpah.add_node("chatbot", chatnode)
 
 grpah.add_edge(START,"chatbot")
 grpah.add_edge("chatbot",END)
+checkpointer = InMemorySaver()
+workflow = grpah.compile(checkpointer=checkpointer)
 
-workflow = grpah.compile()
-
-print(workflow.invoke({"messages":"hi"}))
