@@ -17,12 +17,30 @@ def chatnode(state: ChatbotSchema):
     response = llm.invoke(messages)
     return {"messages":[response]}
 
-grpah = StateGraph(ChatbotSchema)
+graph = StateGraph(ChatbotSchema)
 
-grpah.add_node("chatbot", chatnode)
+graph.add_node("chatbot", chatnode)
 
-grpah.add_edge(START,"chatbot")
-grpah.add_edge("chatbot",END)
+graph.add_edge(START,"chatbot")
+graph.add_edge("chatbot",END)
 checkpointer = InMemorySaver()
-workflow = grpah.compile(checkpointer=checkpointer)
+workflow = graph.compile(checkpointer=checkpointer)
+config = {"configurable":{"thread_id":"1"}}
+
+user_input = input("Enter you input: ")
+workflow.stream(
+    {"messages": HumanMessage(content=user_input)},config=config
+)
+
+# 
+# while True:
+#     
+#     if user_input.lower().strip() in ["exit","quit"]:
+#         print("Bye...")
+#         break
+#     else:
+
+#         res = workflow.invoke({"messages": HumanMessage(content=user_input)},config=config)
+#         print(res["messages"][-1].content)
+
 
