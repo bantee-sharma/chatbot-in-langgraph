@@ -22,7 +22,7 @@ if user_input:
 
 
     response = workflow.invoke({"messages":HumanMessage(content=user_input)},config=config)
-    ai_msg = response["messages"][-1]
+    ai_msg = response["messages"][-1].content
     st.session_state["message_history"].append({"role":"user", "content":ai_msg})
     with st.chat_message("assistant"):
-        st.write(ai_msg.content)
+        st.write(ai_msg)
