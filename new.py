@@ -3,6 +3,9 @@ import streamlit as st
 
 message_history = []
 
+for msg in message_history:
+    with st.chat_message(msg["role"]):
+        st.text(msg["content"])
 
 user_input = st.chat_input("Ask me...")
 
