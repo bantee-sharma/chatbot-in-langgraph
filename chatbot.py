@@ -26,17 +26,17 @@ graph.add_edge("chatbot",END)
 checkpointer = InMemorySaver()
 workflow = graph.compile(checkpointer=checkpointer)
 
-config = {"configurable":{"thread_id":"1"}}
+# config = {"configurable":{"thread_id":"1"}}
 
-user_input = input("Enter you input: ")
+# user_input = input("Enter you input: ")
 
 
-for msg_chunk, metadat in  workflow.stream(
-    {"messages": HumanMessage(content=user_input)},config=config,
-    stream_mode="messages"):
+# for msg_chunk, metadat in  workflow.stream(
+#     {"messages": HumanMessage(content=user_input)},config=config,
+#     stream_mode="messages"):
 
-    if msg_chunk.content:
-        print(msg_chunk.content, end=" ", flush=True)
+#     if msg_chunk.content:
+#         print(msg_chunk.content, end=" ", flush=True)
 
 # 
 # while True:
