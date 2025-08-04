@@ -16,13 +16,13 @@ user_input = st.chat_input("Ask me...")
 
 if user_input:
 
-    st.session_state["message_history"].append({"role":"user", "content":user_input},config=config)
+    st.session_state["message_history"].append({"role":"user", "content":user_input})
     with st.chat_message("user"):
         st.write(user_input)
 
 
-    response = workflow.invoke({"messages":HumanMessage(content=user_input)})
+    response = workflow.invoke({"messages":HumanMessage(content=user_input)},config=config)
     ai_msg = response["messages"][-1]
     st.session_state["message_history"].append({"role":"user", "content":ai_msg})
     with st.chat_message("assistant"):
-        st.write(ai_msg)
+        st.write(ai_msg.content)
