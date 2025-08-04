@@ -3,6 +3,8 @@ import streamlit as st
 from chatbot import workflow
 from langchain_core.messages import HumanMessage
 
+
+st.title(" AI Chatbot Assistant ")
 # st.session_state -> dict -> 
 CONFIG = {'configurable': {'thread_id': 'thread-1'}}
 
