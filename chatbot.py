@@ -28,9 +28,14 @@ workflow = graph.compile(checkpointer=checkpointer)
 config = {"configurable":{"thread_id":"1"}}
 
 user_input = input("Enter you input: ")
-workflow.stream(
-    {"messages": HumanMessage(content=user_input)},config=config
+
+
+stream = workflow.stream(
+    {"messages": HumanMessage(content=user_input)},config=config,
+    stream_mode="messages"
 )
+
+print(type(stream))
 
 # 
 # while True:
