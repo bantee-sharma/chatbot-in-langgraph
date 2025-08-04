@@ -1,4 +1,7 @@
 import streamlit as st
 
-with st.text_input("user"):
+with st.chat_message("user"):
+    st.write("Hii")
+
+with st.chat_message("assistant"):
     st.write("Hii")
