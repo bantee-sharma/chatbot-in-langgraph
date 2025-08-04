@@ -6,7 +6,7 @@ from langchain_core.messages import HumanMessage, BaseMessage
 from langgraph.checkpoint.memory import InMemorySaver
 
 load_dotenv()
-llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash")
+llm = ChatGoogleGenerativeAI(model="gemini-2.0-flash")
 
 class ChatbotSchema(TypedDict):
     
