@@ -62,6 +62,6 @@ chatbot/
 1. **Clone the repository**
 
 ```bash
-git clone https://github.com/your-username/chatbot-in-langgraph.git
+git clone https://github.com/bantee-sharma/chatbot-in-langgraph.git
 cd chatbot-in-langgraph
 
