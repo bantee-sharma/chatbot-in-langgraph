@@ -16,7 +16,7 @@ A context-aware chatbot built using **LangGraph** and **Gemini 2.0 Flash** that 
 ---
 
 ## 📁 Project Structure
-
+```
 chatbot/
 │
 ├── chatbot.py # LangGraph backend workflow
@@ -24,3 +24,4 @@ chatbot/
 ├── .env # API keys and environment variables
 ├── requirements.txt # Python dependencies
 └── README.md # Project documentation
+```
