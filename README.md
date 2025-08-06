@@ -52,7 +52,7 @@ chatbot/
 
 ## 📷 Screenshots
 
-> _Add screenshots of your chatbot running in Streamlit here (optional)_
+>
 <img width="1766" height="955" alt="image" src="https://github.com/user-attachments/assets/a1ecff83-b86c-4464-9ed1-ba053dda1bbb" />
 
 ---
