@@ -25,3 +25,42 @@ chatbot/
 ├── requirements.txt # Python dependencies
 └── README.md # Project documentation
 ```
+
+
+---
+
+## 🛠️ Tech Stack
+
+- **LangGraph** – agent workflow and state management
+- **Google Generative AI (Gemini 2.0 Flash)** – LLM responses
+- **Streamlit** – web UI for real-time interaction
+- **LangChain Core** – messaging formats (`HumanMessage`, etc.)
+- **Python** – orchestration and backend logic
+
+---
+
+## 🧪 How It Works
+
+1. User inputs are captured via Streamlit’s chat interface.
+2. Each conversation is tagged with a `thread_id` (e.g., `thread-1`).
+3. Messages are passed to LangGraph’s compiled workflow.
+4. LangGraph handles agent logic and invokes Gemini 2.0 Flash.
+5. Gemini generates a response, and memory is updated using `InMemorySaver`.
+6. Streamlit displays both user and AI messages in the chat interface.
+
+---
+
+## 📷 Screenshots
+
+> _Add screenshots of your chatbot running in Streamlit here (optional)_
+
+---
+
+## ⚙️ Setup Instructions
+
+1. **Clone the repository**
+
+```bash
+git clone https://github.com/your-username/chatbot-in-langgraph.git
+cd chatbot-in-langgraph
+
