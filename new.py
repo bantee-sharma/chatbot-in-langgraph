@@ -8,7 +8,7 @@ def gen_thread_id():
     return thread_id
 
 
-config = {"configurable": {"thread_id": "1"}}
+config = {"configurable": {"thread_id": st.session_state["thread_id"]}}
 
 
 
@@ -24,6 +24,8 @@ st.sidebar.header("LangGraph ChatBot")
 st.sidebar.button("New Chat")
 
 st.sidebar.header("My Chats")
+
+st.sidebar.text(st.session_state["thread_id"])
 
 
 for message in st.session_state["message_history"]:
@@ -45,7 +47,7 @@ if user_input:
         ai_message = st.write_stream(
             message_chunk.content for message_chunk, metadata in workflow.stream(
                 {'messages': [HumanMessage(content=user_input)]},
-                config= {'configurable': {'thread_id': 'thread-1'}},
+                config= config,
                 stream_mode= 'messages'
             )
         )
