@@ -1,12 +1,23 @@
 import streamlit as st
 from chatbot import workflow
 from langchain_core.messages import HumanMessage
+import uuid
 
-config = {"configurable": {"thread_id": "1"}}
+def gen_thread_id():
+    thread_id = uuid.uuid4
+    return thread_id
+
+
+
 
 if "message_history" not in st.session_state:
     st.session_state["message_history"] = []
 
+if "thread_id" not in st.session_state:
+    st.session_state["thread_id"] = gen_thread_id()
+
+
+config = {"configurable": {"thread_id": st.session_state["thread_id"]}}
 
 for msg in st.session_state["message_history"]:
     with st.chat_message(msg["role"]):
