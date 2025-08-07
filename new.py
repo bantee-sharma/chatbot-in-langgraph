@@ -1,6 +1,11 @@
 import streamlit as st
 from langchain_core.messages import HumanMessage
 from chatbot import workflow
+import uuid
+
+def gen_thread_id():
+    thread_id = uuid.uuid4
+    return thread_id
 
 
 config = {"configurable": {"thread_id": "1"}}
@@ -11,6 +16,10 @@ if 'message_history' not in st.session_state:
     st.session_state["message_history"] = []
 
 st.sidebar.header("LangGraph ChatBot")
+
+st.sidebar.button("New Chat")
+
+st.sidebar.header("My Chats")
 
 
 for message in st.session_state["message_history"]:
