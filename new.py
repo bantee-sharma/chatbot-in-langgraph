@@ -4,7 +4,7 @@ from chatbot import workflow
 import uuid
 
 def gen_thread_id():
-    thread_id = uuid.uuid4
+    thread_id = uuid.uuid4()
     return thread_id
 
 
@@ -14,6 +14,10 @@ config = {"configurable": {"thread_id": "1"}}
 
 if 'message_history' not in st.session_state:
     st.session_state["message_history"] = []
+
+if "thread_id" not in st.session_state:
+    st.session_state["thread_id"] = gen_thread_id()
+
 
 st.sidebar.header("LangGraph ChatBot")
 
