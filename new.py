@@ -10,10 +10,12 @@ def gen_thread_id():
 def reset_chat():
     thread_id = gen_thread_id()
     st.session_state["thread_id"] = thread_id
+    add_thread(st.session_state["thread_id"])
     st.session_state["message_history"] = []
 
-
-
+def add_thread(thread_id):
+    if thread_id not in st.session_state["chat_threads"]:
+        st.session_state["chat_threads"].append(thread_id)
 
 if "message_history" not in st.session_state:
     st.session_state["message_history"] = []
@@ -21,6 +23,10 @@ if "message_history" not in st.session_state:
 if "thread_id" not in st.session_state:
     st.session_state["thread_id"] = gen_thread_id()
 
+if "chat_threads" not in st.session_state:
+    st.session_state["chat_threads"] = []
+
+add_thread(st.session_state["thread_id"])
 
 config = {"configurable": {"thread_id": st.session_state["thread_id"]}}
 
