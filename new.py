@@ -28,6 +28,7 @@ st.sidebar.title("LangGraph Chatbot")
 st.sidebar.button("New Chat")
 
 st.sidebar.header("My Chats")
+st.sidebar.text(st.session_state["thread_id"])
 
 user_input = st.chat_input("Type here...")
 
