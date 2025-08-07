@@ -13,3 +13,10 @@ st.sidebar.header("My Chats")
 
 user_input = st.chat_input("Type here...")
 
+if user_input:
+
+    with st.chat_message("user"):
+        st.text(user_input)
+    
+    with st.chat_input("assistant"):
+        st.text("Hello")
