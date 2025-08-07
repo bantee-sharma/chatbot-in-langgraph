@@ -1,6 +1,6 @@
 import streamlit as st
-
-
+from chatbot import workflow
+from langchain_core.messages import HumanMessage
 
 
 
@@ -18,5 +18,8 @@ if user_input:
     with st.chat_message("user"):
         st.text(user_input)
     
+
+    response = workflow.invoke({"messages": HumanMessage(content=user_input)})
+    ai_msg = response["messages"][-1].content
     with st.chat_message("assistant"):
         st.text(user_input)
