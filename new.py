@@ -1,3 +1,15 @@
 import streamlit as st
 
-st.sidebar("LangGraph Chatbot")
+
+
+
+
+
+st.sidebar.title("LangGraph Chatbot")
+
+st.sidebar.button("New Chat")
+
+st.sidebar.header("My Chats")
+
+user_input = st.chat_input("Type here...")
+
