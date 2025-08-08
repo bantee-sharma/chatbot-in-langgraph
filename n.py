@@ -3,11 +3,25 @@ from langchain_core.messages import HumanMessage
 import streamlit as st
 import uuid
 
+# **************************************** utility functions *************************
+
+
+
+
+# **************************************** Session Setup ******************************
 if 'message_history' not in st.session_state:
     st.session_state["message_history"] = []
 
+# **************************************** Sidebar UI *********************************
+
+st.sidebar.header("LangGraph ChatBot")
+st.sidebar.button("New Chat")
+st.sidebar.header("My Chats")
+
+# **************************************** Main UI ************************************
+
 for msg in st.session_state["message_history"]:
-    with st.session_state(msg["role"]):
+    with st.chat_message(msg["role"]):
         st.text(msg["content"])
 
 config = {"configurable": {"thread_id": "1"}}
