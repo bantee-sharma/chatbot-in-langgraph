@@ -3,9 +3,13 @@ from langchain_core.messages import HumanMessage
 import streamlit as st
 import uuid
 
+# **************************************** utility functions *************************
+
 def gen_thread():
     thread_id = uuid.uuid4()
     return thread_id
+
+# **************************************** Session Setup ******************************
 
 if "message_history" not in st.session_state:
     st.session_state["message_history"] = [] 
@@ -13,12 +17,13 @@ if "message_history" not in st.session_state:
 if "thread_id" not in st.session_state:
     st.session_state["thread_id"] = gen_thread()
 
-config = {"configurable": {"thread_id":gen_thread()}}
+
 
 for msg in st.session_state["message_history"]:
     with st.chat_message(msg["role"]):
         st.text(msg["content"])
 
+# **************************************** Sidebar UI *********************************
 
 st.sidebar.header("LangGraph ChatBot")
 
@@ -26,7 +31,7 @@ st.sidebar.button("New Chat")
 
 st.sidebar.header("My Chats")
 
-
+# **************************************** Main UI ************************************
 
 user_input = st.chat_input("Ask me...")
 if user_input:
@@ -34,6 +39,9 @@ if user_input:
     st.session_state["message_history"].append({"role":"user", "content":user_input})
     with st.chat_message("user"):
         st.text(user_input)
+
+    config = {"configurable": {"thread_id":st.session_state["thread_id"]}}
+
 
     with st.chat_message("assistant"):
 
