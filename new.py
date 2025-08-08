@@ -11,6 +11,15 @@ for msg in st.session_state["message_history"]:
     with st.chat_message(msg["role"]):
         st.text(msg["content"])
 
+
+st.sidebar.header("LangGraph ChatBot")
+
+st.sidebar.button("New Chat")
+
+st.sidebar.header("My Chats")
+
+
+
 user_input = st.chat_input("Ask me...")
 if user_input:
 
