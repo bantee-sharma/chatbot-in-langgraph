@@ -24,6 +24,8 @@ if "thread_id" not in st.session_state:
 st.sidebar.header("LangGraph ChatBot")
 st.sidebar.button("New Chat")
 st.sidebar.header("My Chats")
+for threa_id in st.session_state["thread_id"]:
+    st.text(st.session_state["thread_id"])
 
 # **************************************** Main UI ************************************
 
