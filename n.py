@@ -6,7 +6,7 @@ import uuid
 # **************************************** utility functions *************************
 
 def gen_thread_id():
-    thread_id = uuid.uuid4()
+    thread_id = uuid.uuid4
     return thread_id
 
 def reset_chat():
