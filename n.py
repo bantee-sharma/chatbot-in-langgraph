@@ -12,9 +12,14 @@ def gen_thread_id():
 def reset_chat():
     thread_id = gen_thread_id()
     st.session_state["thread_id"] = thread_id
+    add_thread(st.session_state["thread_id"])
     st.session_state['message_history'] = []
 
+def add_thread(thread_id):
+    if thread_id not in st.session_state["thread_chats"]:
+        st.session_state['thread_chats'].append(thread_id)
 
+    
 # **************************************** Session Setup ******************************
 
 if 'message_history' not in st.session_state:
@@ -23,6 +28,10 @@ if 'message_history' not in st.session_state:
 if 'thread_id' not in st.session_state:
     st.session_state["thread_id"] = gen_thread_id()
 
+if "thread_chats" not in st.session_state:
+    st.session_state["thread_chats"] = []
+
+add_thread(st.session_state['thread_id'])
 # **************************************** Sidebar UI *********************************
 
 st.sidebar.header("LangGraph ChatBot")
