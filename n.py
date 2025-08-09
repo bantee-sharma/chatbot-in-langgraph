@@ -6,7 +6,7 @@ import uuid
 # **************************************** utility functions *************************
 
 def gen_thread_id():
-    thread_id = uuid.uuid4
+    thread_id = uuid.uuid4()
     return thread_id
 
 def reset_chat():
@@ -48,7 +48,7 @@ if user_input:
         st.text(user_input)
 
 
-    config = {"configurable": st.session_state['thread_id']}
+    config = {"configurable": {"thread_id" :st.session_state['thread_id']}}
 
     with st.chat_message("assistant"):
         
