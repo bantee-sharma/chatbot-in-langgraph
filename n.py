@@ -4,7 +4,8 @@ from chatbot import workflow
 import uuid
 
 # **************************************** utility functions *************************
-
+if 'message_history' not in st.session_state:
+    st.session_state["message_history"] = []
 
 
 # **************************************** Session Setup ******************************
@@ -21,9 +22,7 @@ import uuid
 
 
 # **************************************** main UI *********************************
-for msg in st.session_state["message_history"]:
-    with st.chat_message(msg["role"]):
-        st.text(msg["content"])
+
 
 user_input = st.chat_input("Type here...")
 
