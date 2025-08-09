@@ -3,11 +3,44 @@ from langchain_core.messages import HumanMessage
 from chatbot import workflow
 import uuid
 
-config = {"configurable": {"thread_id":"1"}}
+# **************************************** utility functions *************************
+
+def gen_thread():
+    thread_id = uuid.uuid4()
+    return thread_id
+
+def reset_chat():
+    thread_id = gen_thread()
+    st.session_state["thread_id"] = thread_id
+    st.session_state["message_history"] = []
+
+
+
+# **************************************** Session Setup ******************************
+
+
 
 if 'message_history' not in st.session_state:
     st.session_state["message_history"] = []
 
+if 'thread_id' not in st.session_state:
+    st.session_state["thread_id"] = gen_thread()
+
+
+# **************************************** Sidebar UI *********************************
+
+st.sidebar.header("LangGrraph ChatBot")
+
+if st.sidebar.button("New chat"):
+    reset_chat()
+
+st.sidebar.header("My chats")
+st.sidebar.text(st.session_state['thread_id'])
+
+
+
+
+# **************************************** main UI *********************************
 for msg in st.session_state["message_history"]:
     with st.chat_message(msg["role"]):
         st.text(msg["content"])
@@ -20,12 +53,15 @@ if user_input:
     with st.chat_message("user"):
         st.text(user_input)
 
+
+    config = {"configurable": {"thread_id":"1"}}
+
     with st.chat_message("assistant"):
         
         ai_message = st.write_stream(
             message_chunk.content for message_chunk, metadata in workflow.stream(
                 {'messages': [HumanMessage(content=user_input)]},
-                config= {'configurable': {'thread_id': 'thread-1'}},
+                config= config,
                 stream_mode= 'messages'
             )
         )
