@@ -16,7 +16,11 @@ if 'message_history' not in st.session_state:
 
 # **************************************** Sidebar UI *********************************
 
+st.sidebar.header("LangGraph ChatBot")
 
+st.sidebar.button("New Chat")
+
+st.sidebar.header("My chats")
 
 
 
