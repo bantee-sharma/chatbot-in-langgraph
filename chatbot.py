@@ -3,7 +3,8 @@ from langgraph.graph import StateGraph, END, START, add_messages
 from dotenv import load_dotenv
 from typing import TypedDict, Annotated
 from langchain_core.messages import HumanMessage, BaseMessage
-from langgraph.checkpoint.memory import InMemorySaver
+from langgraph.checkpoint.sqlite import SqliteSaver
+import sqlite3
 
 load_dotenv()
 llm = ChatGoogleGenerativeAI(model="gemini-2.0-flash")
@@ -17,15 +18,22 @@ def chatnode(state: ChatbotSchema):
     response = llm.invoke(messages)
     return {"messages":[response]}
 
+conn = sqlite3.connect(database='chatbot.db', check_same_thread=False)
 graph = StateGraph(ChatbotSchema)
 
 graph.add_node("chatbot", chatnode)
 
 graph.add_edge(START,"chatbot")
 graph.add_edge("chatbot",END)
-checkpointer = InMemorySaver()
+checkpointer = SqliteSaver(conn=conn)
 workflow = graph.compile(checkpointer=checkpointer)
 
+def retrieve_all_threads():
+    all_threads = set()
+    for checkpoint in checkpointer.list(None):
+        all_threads.add(checkpoint.config['configurable']['thread_id'])
+
+    return list(all_threads)
 # config = {"configurable":{"thread_id":"1"}}
 
 # user_input = input("Enter you input: ")
