@@ -4,15 +4,18 @@ from chatbot import workflow
 import uuid
 
 # **************************************** utility functions *************************
-if 'message_history' not in st.session_state:
-    st.session_state["message_history"] = []
 
+def gen_thread_id():
+    thread_id = uuid.uuid4()
+    return thread_id
 
 # **************************************** Session Setup ******************************
 
+if 'message_history' not in st.session_state:
+    st.session_state["message_history"] = []
 
-
-
+if 'thread_id' not in st.session_state:
+    st.session_state["thread_id"] = gen_thread_id()
 
 # **************************************** Sidebar UI *********************************
 
@@ -39,7 +42,7 @@ if user_input:
         st.text(user_input)
 
 
-    config = {"configurable": {"thread_id":"1"}}
+    config = {"configurable": st.session_state['thread_id']}
 
     with st.chat_message("assistant"):
         
