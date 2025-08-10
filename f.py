@@ -9,6 +9,11 @@ def gen_thread_id():
     thread_id = uuid.uuid4()
     return thread_id
 
+def chat_reset():
+    thread_id = gen_thread_id()
+    st.session_state["thread_id"] = thread_id
+    st.session_state['message_history']= []
+
 # **************************************** session setup *************************
 if "message_history" not in st.session_state:
     st.session_state["message_history"] = []
@@ -23,7 +28,8 @@ for msg in st.session_state["message_history"]:
 # **************************************** sidebar *************************
 
 st.sidebar.header("LangGraph ChatBot")
-st.sidebar.button("New Chat")
+if st.sidebar.button("New Chat"):
+    chat_reset()
 st.sidebar.header("My Chats")
 st.sidebar.text(st.session_state["thread_id"])
 
