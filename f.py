@@ -21,9 +21,9 @@ if "message_history" not in st.session_state:
 if 'thread_id' not in st.session_state:
     st.session_state["thread_id"] = gen_thread_id()
 
-for msg in st.session_state["message_history"]:
-    with st.chat_message(msg["role"]):
-        st.text(msg["content"])
+if 'chat_threads' not in st.session_state:
+    st.session_state['chat_threads'] = gen_thread_id()
+
 
 # **************************************** sidebar *************************
 
@@ -31,14 +31,21 @@ st.sidebar.header("LangGraph ChatBot")
 if st.sidebar.button("New Chat"):
     chat_reset()
 st.sidebar.header("My Chats")
+
 st.sidebar.text(st.session_state["thread_id"])
 
-for thread_id in st.session_state["thread_id"]:
+for thread_id in st.session_state["chat_threads"]:
     st.text(thread_id)
+
 
 
 # **************************************** main ui *************************
 user_input = st.chat_input("Type here...")
+
+
+for msg in st.session_state["message_history"]:
+    with st.chat_message(msg["role"]):
+        st.text(msg["content"])
 
 
 
@@ -51,8 +58,14 @@ if user_input:
         st.text(user_input)
 
     
-    response = workflow.invoke({"messages":[HumanMessage(content=user_input)]},config=config)
-    ai_msg = response["messages"][-1].content
-    st.session_state["message_history"].append({"role":"assistant", "content": ai_msg})
     with st.chat_message("assistant"):
-        st.text(ai_msg)
+
+        ai_message = st.write_stream(
+            message_chunk.content for message_chunk, metadata in workflow.stream(
+                {'messages': [HumanMessage(content=user_input)]},
+                config= {'configurable': {'thread_id': 'thread-1'}},
+                stream_mode= 'messages'
+            )
+        )
+
+    st.session_state['message_history'].append({'role': 'assistant', 'content': ai_message})
