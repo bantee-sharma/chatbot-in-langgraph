@@ -33,6 +33,9 @@ if st.sidebar.button("New Chat"):
 st.sidebar.header("My Chats")
 st.sidebar.text(st.session_state["thread_id"])
 
+for thread_id in st.session_state["thread_id"]:
+    st.text(thread_id)
+
 
 # **************************************** main ui *************************
 user_input = st.chat_input("Type here...")
