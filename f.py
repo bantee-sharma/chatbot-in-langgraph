@@ -31,7 +31,7 @@ if 'thread_id' not in st.session_state:
     st.session_state["thread_id"] = gen_thread_id()
 
 if "thread_chats" not in st.session_state:
-    st.session_state["thread_chats"] = retrieve_all_threads
+    st.session_state["thread_chats"] = retrieve_all_threads()
 
 add_thread(st.session_state['thread_id'])
 # **************************************** Sidebar UI *********************************
@@ -42,7 +42,6 @@ if st.sidebar.button("New Chat"):
     reset_chat()
 
 st.sidebar.header("My chats")
-st.sidebar.text(st.session_state["thread_id"])
 
 for thread_id in st.session_state["thread_chats"][::-1]:
     if st.sidebar.button(str(thread_id)):
