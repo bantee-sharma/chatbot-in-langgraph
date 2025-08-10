@@ -12,11 +12,12 @@ def gen_thread_id():
 def chat_reset():
     thread_id = gen_thread_id()
     st.session_state["thread_id"] = thread_id
+    add_thread(st.session_state["thread_id"])
     st.session_state['message_history']= []
 
 def add_thread(thread_id):
-    if thread_id not in st.session_state["thread_id"]:
-        st.session_state["thread_id"].append(thread_id)
+    if thread_id not in st.session_state["chat_threads"]:
+        st.session_state["chat_threads"].append(thread_id)
 
 # **************************************** session setup *************************
 if "message_history" not in st.session_state:
@@ -28,6 +29,7 @@ if 'thread_id' not in st.session_state:
 if 'chat_threads' not in st.session_state:
     st.session_state['chat_threads'] = gen_thread_id()
 
+add_thread(st.session_state["thread_id"])
 
 # **************************************** sidebar *************************
 
@@ -36,10 +38,10 @@ if st.sidebar.button("New Chat"):
     chat_reset()
 st.sidebar.header("My Chats")
 
-st.sidebar.text(st.session_state["thread_id"])
-
 for thread_id in st.session_state["chat_threads"]:
-    st.text(thread_id)
+    st.sidebar.text(thread_id)
+
+
 
 
 
