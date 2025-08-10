@@ -1,6 +1,6 @@
 import streamlit as st
 from langchain_core.messages import HumanMessage
-from chatbot import workflow
+from chatbot import workflow, retrieve_all_threads
 import uuid
 
 # **************************************** utility functions *************************
@@ -31,7 +31,7 @@ if 'thread_id' not in st.session_state:
     st.session_state["thread_id"] = gen_thread_id()
 
 if "thread_chats" not in st.session_state:
-    st.session_state["thread_chats"] = []
+    st.session_state["thread_chats"] = retrieve_all_threads
 
 add_thread(st.session_state['thread_id'])
 # **************************************** Sidebar UI *********************************
