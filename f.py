@@ -14,6 +14,10 @@ def chat_reset():
     st.session_state["thread_id"] = thread_id
     st.session_state['message_history']= []
 
+def add_thread(thread_id):
+    if thread_id not in st.session_state["thread_id"]:
+        st.session_state["thread_id"].append(thread_id)
+
 # **************************************** session setup *************************
 if "message_history" not in st.session_state:
     st.session_state["message_history"] = []
