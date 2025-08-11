@@ -1,6 +1,7 @@
 # 🧠 Thread-Aware Conversational AI Chatbot using LangGraph and Gemini
 
 
+
 A context-aware chatbot built using **LangGraph** and **Gemini 2.0 Flash** that maintains conversation memory based on a unique `thread_id`, enabling personalized, multi-turn interactions. Integrated with a **Streamlit** frontend for real-time chat visualization.
 
 ---
