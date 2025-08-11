@@ -14,7 +14,6 @@ A context-aware chatbot built using **LangGraph** and **Gemini 2.0 Flash** that 
 - 💾 In-memory checkpointing via `InMemorySaver` for simplicity
 
 ---
-
 ## 📁 Project Structure
 
 ```
