@@ -9,7 +9,6 @@ A context-aware chatbot built using **LangGraph** and **Gemini 2.0 Flash** that 
 
 ## 🚀 Features
 
-
 - 💬 **Multi-turn conversations** with session-level memory
 - 🧠 **Thread-specific context** retention using `thread_id`
 - ⚙️ **LangGraph-powered agent workflow** with state management
